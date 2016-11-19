@@ -1,6 +1,3 @@
-model_checkpoint_path: "mdl3-96.91-90000"
-all_model_checkpoint_paths: "mdl3-96.79-42000"
-all_model_checkpoint_paths: "best_validation"
-all_model_checkpoint_paths: "mdl397-100000"
-all_model_checkpoint_paths: "mdl3-97.70-100000"
-all_model_checkpoint_paths: "mdl3-96.91-90000"
+version https://git-lfs.github.com/spec/v1
+oid sha256:6d0af3f363476bb7928f91713e880d989d6913f68d26980e22854a2b2549e984
+size 274
