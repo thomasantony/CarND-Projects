@@ -1,3 +1,5 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:f0dcb007a0214099fe040fc3d032b0bb2ac6dae28609a7f052b72687f23af94c
-size 168
+model_checkpoint_path: "best_validation"
+all_model_checkpoint_paths: "mdl3-1000"
+all_model_checkpoint_paths: "mdl3-10000"
+all_model_checkpoint_paths: "mdl396-50000"
+all_model_checkpoint_paths: "best_validation"
