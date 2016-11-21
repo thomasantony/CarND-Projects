@@ -1,0 +1,6 @@
+model_checkpoint_path: "mdl3-97.09-140001"
+all_model_checkpoint_paths: "mdl397-130000"
+all_model_checkpoint_paths: "mdl3-97.02-130000"
+all_model_checkpoint_paths: "best_validation"
+all_model_checkpoint_paths: "mdl396-160000"
+all_model_checkpoint_paths: "mdl3-97.09-140001"
