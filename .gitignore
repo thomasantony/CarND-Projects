@@ -1,3 +1,5 @@
+*.p
+
 *.pickle
 *.zip
 .DS_Store
