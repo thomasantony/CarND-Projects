@@ -4,6 +4,7 @@ tf.python.control_flow_ops = tf
 
 np.random.seed(1337)  # for reproducibility
 
+
 from keras.datasets import mnist
 from keras.models import Sequential
 from keras.layers import Dense, Dropout, Activation
@@ -31,66 +32,20 @@ input_shape = (img_rows, img_cols, 1)
 Y_train = np_utils.to_categorical(y_train, nb_classes)
 Y_test = np_utils.to_categorical(y_test, nb_classes)
 
-# 99% after 10 epochs
-# model = Sequential()
-# model.add(Convolution2D(32, 5, 5,
-#                         border_mode='valid',
-#                         input_shape=(28, 28, 1)))
-# model.add(Activation('relu'))
-# # model.add(Convolution2D(32, 3, 3))
-# # model.add(Activation('relu'))
-# model.add(MaxPooling2D(pool_size=pool_size))
-# model.add(Dropout(0.5))
-# model.add(Flatten())
-# model.add(Dense(128))
-# model.add(Activation('relu'))
-# model.add(Dense(nb_classes))
-# model.add(Activation('softmax'))
-
-# 99.28%
-# model = Sequential()
-# model.add(Convolution2D(16, 5, 5,
-#                         border_mode='same',
-#                         input_shape=(28, 28, 1)))
-# model.add(Activation('relu'))
-# model.add(MaxPooling2D(pool_size=pool_size))
-# model.add(Convolution2D(32, 3, 3))
-# model.add(Activation('relu'))
-# model.add(MaxPooling2D(pool_size=pool_size))
-# model.add(Dropout(0.5))
-# model.add(Flatten())
-# model.add(Dense(256))
-# model.add(Activation('relu'))
-# model.add(Dropout(0.5))
-# model.add(Dense(nb_classes))
-# model.add(Activation('softmax'))
-
-# 99.44% @ 15 epoch
 model = Sequential()
-model.add(Convolution2D(16, 5, 5,
-                        border_mode='same',
+model.add(Convolution2D(32, 5, 5,
+                        border_mode='valid',
                         input_shape=(28, 28, 1)))
 model.add(Activation('relu'))
-model.add(Convolution2D(32, 3, 3))
-model.add(Activation('relu'))
+# model.add(Convolution2D(32, 3, 3))
+# model.add(Activation('relu'))
 model.add(MaxPooling2D(pool_size=pool_size))
 model.add(Dropout(0.5))
-model.add(Convolution2D(64, 3, 3))
-model.add(Activation('relu'))
-model.add(MaxPooling2D(pool_size=pool_size))
-model.add(Dropout(0.5))
+
 model.add(Flatten())
-model.add(Dense(256))
+model.add(Dense(128))
 model.add(Activation('relu'))
 model.add(Dense(nb_classes))
 model.add(Activation('softmax'))
+
 model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
-
-h = model.fit(X_train, Y_train, batch_size=128, nb_epoch=10,
-    validation_data=(X_test, Y_test), verbose=1)
-
-score = model.evaluate(X_test, Y_test, verbose=0)
-
-from keras.utils.visualize_util import plot
-
-plot(model, to_file='model.png')
