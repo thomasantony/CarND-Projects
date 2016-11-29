@@ -32,7 +32,7 @@ def load_data():
     for index, row in tqdm(driving_log.iterrows(), unit=' rows', total=num_rows):
         fname = os.path.basename(row['center'])
         # Normalized YUV
-        train_images[index] = imread(data_path+'IMG/'+fname, False, 'YCbCr').astype(np.float32)/255.
+        train_images[index] = imread(data_path+'IMG/'+fname, False, 'RGB')/255.
 
     print('Loaded', num_rows, 'rows.')
     return train_images, train_steering
