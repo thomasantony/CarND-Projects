@@ -71,13 +71,16 @@ def telemetry(sid, data):
     # Throttle down at higher angles
     # neg throttle if |Steering| > 3.75 deg
     speed = float(speed)
-    throttle_max = 0.2
-    top_speed = 15
-    # throttle = throttle_max - abs(steering_angle)*throttle_max
-    if speed > abs(steering_angle)*top_speed/2:
-        throttle = -0.05
+    throttle_max = 0.1  # like spring constant
+    throttle_min = -0.2
+    steering_max = 2./25.
+    top_speed = 10  # Drove with 15, a little unstable
+
+    if speed > (1.0 - abs(steering_angle))*top_speed:
+        throttle = abs(steering_angle)/steering_max * throttle_min
+        throttle = max(throttle_min, throttle)
     if speed < 5:
-        throttle = 0.05
+        throttle = throttle_max
 
     print(steering_angle, throttle)
     send_control(steering_angle, throttle)
