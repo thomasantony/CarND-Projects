@@ -69,7 +69,7 @@ def telemetry(sid, data):
     # The driving model currently just outputs a constant throttle. Feel free to edit this.
 
     # Throttle down at higher angles
-    throttle_max = 0.1
+    throttle_max = 0.05
     throttle = throttle_max - min(abs(steering_angle),0.5)*throttle_max*2
     print(steering_angle, throttle)
     send_control(steering_angle, throttle)
