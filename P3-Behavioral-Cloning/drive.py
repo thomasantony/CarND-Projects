@@ -29,13 +29,16 @@ from keras.applications.vgg16 import preprocess_input
 vgg = False
 
 def normalize_color(image_data):
+    # For model 4
     a = -0.5
     b = +0.5
+    # a = +0.1
+    # b = +0.9
 
     Xmin = 0.0
     Xmax = 255.0
 
-    norm_img = np.empty_like(image_data, dtype=np.float32)
+    # norm_img = np.empty_like(image_data, dtype=np.float32)
 
     norm_img = a + (image_data - Xmin)*(b-a)/(Xmax - Xmin)
     return norm_img
@@ -57,7 +60,7 @@ def telemetry(sid, data):
         x = np.expand_dims(x, axis=0)
         transformed_image_array = preprocess_input(x)
     else:
-        image = image.convert('YCbCr')
+        image = image.convert('YCbCr') # Needed for model < 5
         image_array = np.asarray(image, dtype=np.float32)
         # transformed_image_array = (image_array[None, :, :, :])/255. # model <= 2
         transformed_image_array = normalize_color(image_array[None, :, :, :]) # model >= 3
@@ -71,18 +74,28 @@ def telemetry(sid, data):
     # Throttle down at higher angles
     # neg throttle if |Steering| > 3.75 deg
     speed = float(speed)
-    throttle_max = 0.1  # like spring constant
-    throttle_min = -0.4
-    steering_max = 1./25.
-    top_speed = 10  # Drove with 15, a little unstable
 
-    if speed > (1.0 - abs(steering_angle))*top_speed:
-        throttle = abs(steering_angle)/steering_max * throttle_min
-        throttle = max(throttle_min, throttle)
-    if speed < 5:
-        throttle = throttle_max
+    throttle_max = 1.0
+    throttle = 0.0
+    steering_threshold = 4./25
+
+    # Targets for speed controller
+    nominal_set_speed = 12
+    steering_set_speed = 8
+
+    K = 0.15   # Proportional gain
+
+    # Slow down for turns
+    if abs(steering_angle) > steering_threshold:
+        set_speed = steering_set_speed
+    else:
+        set_speed = nominal_set_speed
+
+    throttle = (set_speed - speed)*K
+    throttle = min(throttle_max, throttle)
+
     # else don't change from previous
-    print(steering_angle, throttle)
+    # print(steering_angle, throttle)
     send_control(steering_angle, throttle)
 
 
