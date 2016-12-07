@@ -11,6 +11,7 @@ from PIL import Image
 from PIL import ImageOps
 from flask import Flask, render_template
 from io import BytesIO
+import cv2
 
 from keras.models import model_from_json
 from keras.preprocessing.image import ImageDataGenerator, array_to_img, img_to_array
@@ -60,8 +61,10 @@ def telemetry(sid, data):
         x = np.expand_dims(x, axis=0)
         transformed_image_array = preprocess_input(x)
     else:
-        image = image.convert('YCbCr') # Needed for model < 5
+        # image = image.convert('YCbCr') # Needed for model < 5
         image_array = np.asarray(image, dtype=np.float32)
+        image_array = cv2.cvtColor(image_array, cv2.COLOR_RGB2YUV) # model >= 5
+
         # transformed_image_array = (image_array[None, :, :, :])/255. # model <= 2
         transformed_image_array = normalize_color(image_array[None, :, :, :]) # model >= 3
 
@@ -76,12 +79,12 @@ def telemetry(sid, data):
     speed = float(speed)
 
     throttle_max = 1.0
-    throttle = 0.0
-    steering_threshold = 4./25
+    throttle_min = -1.0
+    steering_threshold = 2./25
 
     # Targets for speed controller
-    nominal_set_speed = 12
-    steering_set_speed = 8
+    nominal_set_speed = 10
+    steering_set_speed = 5
 
     K = 0.15   # Proportional gain
 
@@ -93,7 +96,7 @@ def telemetry(sid, data):
 
     throttle = (set_speed - speed)*K
     throttle = min(throttle_max, throttle)
-
+    throttle = max(throttle_min, throttle)
     # else don't change from previous
     # print(steering_angle, throttle)
     send_control(steering_angle, throttle)
