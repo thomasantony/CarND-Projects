@@ -10,7 +10,11 @@
 \usepackage{url}
 \usepackage{courier}
 \usepackage{listings}
-\usepackage{hyperref}
+\usepackage[colorlinks = true,
+            linkcolor = blue,
+            urlcolor  = blue,
+            citecolor = blue,
+            anchorcolor = blue]{hyperref}
 
 %%% Custom sectioning
 \usepackage{sectsty}
@@ -96,9 +100,9 @@ The use of the live training methodology described in Section~\ref{sec:live_trai
   \label{fig:model_arch}
 \end{figure}
 
-The architecture does not contain any dropout layers. But during the initial training step, a separate dataset was generated and used for testing. A validation dataset with 10\% of the original dataset was also used.
+The architecture does not contain any dropout layers. The MSE of the model was always above 0.01 for working versions and so there doesn't seem to be much overfitting going on. However, to be sure of this, a model can be trained on just data from track 1 and tested on track 2. This wasn't done due to time constraints as the focus was on getting at least one model that worked on one or both tracks. To further test for "memorizing" the track, the car was also tested by deliberately perturbing it's path from time to time and it was found that it always returned to the center of the lane.
 
-The MSE of the model was always above 0.01 for working versions and so there doesn't seem to be much overfitting going on. However, to be sure of this, a model can be trained on just data from track 1 and tested on track 2. This wasn't done due to time constraints as the focus was on getting at least one model that worked on one or both tracks. To further test for "memorizing" the track, the car was also tested by deliberately perturbing it's path from time to time and it was found that it always returned to the center of the lane.
+During the initial training step, a separate dataset was generated and used for testing. A validation dataset with 10\% of the original dataset was also used. Further more, live testing + training was also performed as described in the upcoming sections. The resulting model is able to drive on track 1 at 30 mph and track 2 at 20 mph.
 
 \subsection{Training Strategies}
 
