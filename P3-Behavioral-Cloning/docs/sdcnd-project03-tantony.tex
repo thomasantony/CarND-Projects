@@ -90,9 +90,9 @@ $ git submodule update --init --recursive --remote
 \section{Model Architecture and Training Strategy}
 
 \subsection{Neural Network Architecture}
-Multiple training architectures based on Convolutional Neural Networks were evaluated. Most of them failed. Transfer learning with VGG16 and Inception v3 was also attempted. Finally, the architecture described in NVIDIA's End-To-End deep learning paper\cite{nvidia:endtoend2016} was used. This architecture was chosen at the end after experimenting with many others, primarily due to the small size and hence low processing latency. A normalization layer was added on top of the network to normalize the input images.
+Multiple training architectures based on Convolutional Neural Networks were evaluated. Most of them failed. Transfer learning with VGG16 and Inception v3 was also attempted. These networks were used by removing the final layers and replacing them with my own fully connected and convolutional layers. However, none of them were able to drive properly on the tracks. This could be because of bad training data, which was mitigated in my final model by using live training described in Section~\ref{sec:live_training}.
 
-The use of the live training methodology described in Section~\ref{sec:live_training} also helped getting this model to work. Additional models were not tested using the live training strategy due to lack of time. The model architecture is shown in Fig.~\ref{fig:model_arch}.
+Finally, the architecture described in NVIDIA's End-To-End deep learning paper\cite{nvidia:endtoend2016} was used. This architecture was chosen at the end after experimenting with many others, primarily due to the small size and hence low processing latency. A normalization layer was added on top of the network to normalize the input images. The use of the live training methodology described in Section~\ref{sec:live_training} also helped getting this model to work. Additional models were not tested using the live training strategy due to lack of time. The model architecture is shown in Fig.~\ref{fig:model_arch}. The model consists of five convolutional layers to extract features followed by four fully-connected layers to perform regression. 
 
 \begin{figure}[!htbp]
   \includegraphics[width=\linewidth]{model.png}
@@ -131,6 +131,16 @@ Th cruise control was implemented as a simple proportional gain controller. The 
 T = K_p \left(v_{target} - v\right)
 \]
 where $T$ is the throttle, $K_p$ is the proportional gain and $v_{target}$ and $v$ are the targeted and current speeds respectively. The gain was picked to be 0.35. This was able to get the speed within $\pm 1$ mph of the target speed.
+
+\section{Simulation}
+The model was tested in the simulator in autonomous mode on an Ubuntu Desktop with and AMD FX-8320 processor, 8GB RAM and a GTX 1070 GPU. 
+The videos of running the Simulator in autonomous mode using both the live trainer and \emph{drive.py} can be seen at the following links:
+
+\href{https://www.youtube.com/watch?v=oAujMdetS-0}{https://www.youtube.com/watch?v=oAujMdetS-0} - Track 1 using live trainer in autonomous mode
+
+\href{https://www.youtube.com/watch?v=5vQrzi_CVaM}{https://www.youtube.com/watch?v=5vQrzi\_CVaM} - Track 1 using \emph{drive.py}
+
+\href{https://www.youtube.com/watch?v=SINNzj16PvA}{https://www.youtube.com/watch?v=SINNzj16PvA} - Track 2 using \emph{drive.py}
 
 \bibliographystyle{abbrv}
 \bibliography{\jobname} 
