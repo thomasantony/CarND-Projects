@@ -1,0 +1,12 @@
+[submodule "P01-Lane-Lines"]
+	path = P01-Lane-Lines
+	url = https://github.com/thomasantony/CarND-P01-Lane-Lines.git
+[submodule "P02-Traffic-Signs"]
+	path = P02-Traffic-Signs
+	url = https://github.com/thomasantony/CarND-P02-Traffic-Signs
+[submodule "P03-Behavioral-Cloning"]
+	path = P03-Behavioral-Cloning
+	url = https://github.com/thomasantony/CarND-P03-Behavioral-Cloning.git
+[submodule "P04-Advanced-Lane-Lines"]
+	path = P04-Advanced-Lane-Lines
+	url = https://github.com/thomasantony/CarND-P04-Advanced-Lane-Lines.git
