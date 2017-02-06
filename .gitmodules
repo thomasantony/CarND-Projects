@@ -10,3 +10,6 @@
 [submodule "P04-Advanced-Lane-Lines"]
 	path = P04-Advanced-Lane-Lines
 	url = https://github.com/thomasantony/CarND-P04-Advanced-Lane-Lines.git
+[submodule "P05-Vehicle-Detection"]
+	path = P05-Vehicle-Detection
+	url = https://github.com/thomasantony/CarND-P05-Vehicle-Detection
