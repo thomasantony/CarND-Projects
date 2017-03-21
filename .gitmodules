@@ -13,3 +13,6 @@
 [submodule "P05-Vehicle-Detection"]
 	path = P05-Vehicle-Detection
 	url = https://github.com/thomasantony/CarND-P05-Vehicle-Detection
+[submodule "P06-Extended-Kalman-Filter"]
+	path = P06-Extended-Kalman-Filter
+	url = https://github.com/thomasantony/CarND-P06-EKF
