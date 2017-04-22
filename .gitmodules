@@ -19,3 +19,6 @@
 [submodule "P07-Unscented-Kalman-Filter"]
 	path = P07-Unscented-Kalman-Filter
 	url = https://github.com/thomasantony/CarND-P07-UKF
+[submodule "P08-Kidnapped-Vehicle"]
+	path = P08-Kidnapped-Vehicle
+	url = https://github.com/thomasantony/CarND-P08-Kidnapped-Vehicle
