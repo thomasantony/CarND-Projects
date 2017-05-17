@@ -22,3 +22,6 @@
 [submodule "P08-Kidnapped-Vehicle"]
 	path = P08-Kidnapped-Vehicle
 	url = https://github.com/thomasantony/CarND-P08-Kidnapped-Vehicle
+[submodule "P09-PID-Control"]
+	path = P09-PID-Control
+	url = https://github.com/thomasantony/CarND-P09-PID-Control
