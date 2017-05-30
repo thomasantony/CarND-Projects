@@ -25,3 +25,9 @@
 [submodule "P09-PID-Control"]
 	path = P09-PID-Control
 	url = https://github.com/thomasantony/CarND-P09-PID-Control
+[submodule "P10-MPC"]
+	path = P10-MPC
+	url = https://github.com/thomasantony/CarND-P10-MPC
+[submodule "labs/MPC-Quizzes"]
+	path = labs/MPC-Quizzes
+	url = https://github.com/thomasantony/CarND-MPC-Quizzes
